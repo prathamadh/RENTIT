@@ -11,7 +11,10 @@ urlpatterns = [
     #path('gmc/',views.gmc,name="gmc"),
     path('endpoint/', views.endpoint_view, name='endpoint'),
     path('experiments/', views.experiment, name='experiment'),
-    path('signin/', views.signin, name='signin')
+    path('signin/', views.signin, name='signin'),
+    path('listbuliding/', views.listbuilding, name='listbuilding'),
+    path('index2/', views.index2, name='index2')
+
     
     
 

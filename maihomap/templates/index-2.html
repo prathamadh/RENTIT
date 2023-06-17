@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rent-It</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href={% static "index2style.css" %}/>
+    <link rel="stylesheet" href={% static "index-2.css" %} />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <!-- Container wrapper -->
+      <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="#"
+          ><i class="fa-sharp fa-solid fa-house-chimney-user">Rent-It</i></a
+        >
+        <!-- Search form -->
+        <form class="input-group" style="width: 400px">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Location"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            data-mdb-ripple-color="dark"
+            style="padding: 0.45rem 1.5rem 0.35rem"
+          >
+            Search
+          </button>
+        </form>
+
+        <label class="switch">
+          <input type="checkbox" id="checkS"/>
+          <span class="slider round"></span>
+        </label>
+        <!-- <input type="checkbox" name="checkS" id="checkS" /> -->
+
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left links -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex flex-column text-center"
+                aria-current="page"
+                href="#"
+                ><i class="fa-solid fa-money-bill-trend-up"></i
+                ><span class="small">Rent Out</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex flex-column text-center"
+                aria-current="page"
+                href="#"
+                ><i class="fa-solid fa-truck-ramp-box"></i
+                ><span class="small">Mover</span></a
+              >
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+                  class="rounded-circle"
+                  height="30"
+                  alt=""
+                  loading="lazy"
+                />
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+
+    <div><h3>Rooms Available Nearby</h3></div>
+
+    <div id="container">
+      <div class="product-details">
+        <h1>{variable: house name }</h1>
+        <span class="hint-star star">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+        </span>
+
+        <p class="information">{variable: house details}</p>
+
+        <div class="control">
+          <button class="btn">
+            <span class="price">{variable:price}</span>
+            <span class="shopping-cart"
+              ><i class="fa fa-shopping-cart" aria-hidden="true"></i
+            ></span>
+            <span class="buy">Get now</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="product-image">
+        <img src="{variable: house image}" alt="" />
+
+        <div class="info">
+          <h2>Description</h2>
+          <ul>
+            <li><strong> Location: </strong>{variable: location}</li>
+            <li><strong>Shade : </strong>Olive green</li>
+            <li><strong>Decoration: </strong>balls and bells</li>
+            <li><strong>Material: </strong>Eco-Friendly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src={% static "index-2.js" %}></script>
+    <!-- <script>
+      var val = document.getElementById("checkS");
+      console.log(val.checked);
+    </script> -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var checkbox = document.querySelector('.switch input[type="checkbox"]');
+
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            //Checkbox is checked, redirect to another page
+            window.location.replace("http://127.0.0.1:8000/");
+            var naam=window.location.href;
+            console.log(naam) 
+
+          } 
+          else {
+            //Checkbox is unchecked, redirect to another page
+            window.location.href='#'
+           
+            console.log(naam) 
+         }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -42,7 +42,3 @@ function error(err) {
     alert("Unable to retrieve info");
   }
 }
-
-{% for c in results %} 
-
-          {% endfor %}

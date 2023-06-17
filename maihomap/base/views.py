@@ -2,6 +2,7 @@ from django.shortcuts import render
 from base.models import Contact
 from base.models import Owner
 from django.shortcuts import redirect
+# from base.models import Owner
 
 # Create your views here.
 from django.shortcuts import HttpResponse
@@ -25,16 +26,20 @@ def index(request):
 def owner(request):
     if request.method == 'POST':
         houseloc = request.POST.get('location')
+        
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         desc= request.POST.get('description')
         rentprice = request.POST.get('rentPrice')
         noroom = request.POST.get('numRooms')
         name = request.POST.get('ownerName')
+        latitude=28.248767785991863
+        longitude=83.98629856004847
 
         # Create a new Contact instance
         contact = Owner(
-            houseloc=houseloc,
+            latitude=latitude,
+            longitude=longitude,
             email=email,
             phone=phone,
             desc=desc,
@@ -113,6 +118,16 @@ def signin(request):
 
 
     return render(request,"sign_in.html")
+
+def listbuilding(request):
+    owner_obj=Owner.objects.get(id=1)
+    
+    print(owner_obj.phone)
+    return render(request,"cards.html")
+
+def index2(request):
+    #import data
+    return render(request,"index-2.html")
 
 
 
