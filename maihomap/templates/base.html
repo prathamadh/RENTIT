@@ -1,0 +1,41 @@
+<!-- Include the jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    // Function to handle the button click event
+    $('#postButton').click(function() {
+      var variable1 = 'value1';
+      var variable2 = 'value2';
+      // Add more variables as needed
+      
+      // Create the data object with the variables
+      var data = {
+        variable1: variable1,
+        variable2: variable2
+      };
+      
+      // Make the AJAX POST request
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'your_view_name' %}',  // Replace with your actual view URL
+        data: JSON.stringify(data),
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'  // Include the CSRF token
+        },
+        contentType: 'application/json',
+        success: function(response) {
+          // Handle the success response
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle errors
+          console.error(xhr.responseText);
+        }
+      });
+    });
+  });
+</script>
+
+<!-- Add the button to trigger the POST request -->
+<button id="postButton">Post Data</button>
