@@ -130,5 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 STATICFILES_DIRS =[
-    os.path.join(BASE_DIR,"reactapp/build/static")
+    os.path.join(BASE_DIR,"static/")
 ]

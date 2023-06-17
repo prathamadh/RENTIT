@@ -39,3 +39,224 @@
 
 <!-- Add the button to trigger the POST request -->
 <button id="postButton">Post Data</button>
+
+
+
+
+//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Map Coordinate Selector</title>
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+
+    #output {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.Default.css" />
+</head>
+<body>
+  <h1>Map Coordinate Selector</h1>
+  <div id="map"></div>
+  <p>Selected Coordinates:</p>
+  <div id="output">
+    <span id="latitude"></span>
+    <span id="longitude"></span>
+  </div>
+  <button id="postButton">Post Coordinates</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    
+    var marker;
+    
+    function onMapClick(e) {
+      if (marker) {
+        map.removeLayer(marker);
+      }
+    
+      marker = L.marker(e.latlng).addTo(map);
+    
+      var lat = e.latlng.lat;
+      var lon = e.latlng.lng;
+    
+      var latitudeElement = document.getElementById('latitude');
+      var longitudeElement = document.getElementById('longitude');
+    
+      latitudeElement.innerHTML = 'Latitude: ' + lat;
+      longitudeElement.innerHTML = 'Longitude: ' + lon;
+    }
+    
+    map.on('click', onMapClick);
+
+    var postButton = document.getElementById('postButton');
+    postButton.addEventListener('click', function() {
+      var latitudeElement = document.getElementById('latitude');
+      var longitudeElement = document.getElementById('longitude');
+      var latitude = latitudeElement.innerHTML.replace('Latitude: ', '');
+      var longitude = longitudeElement.innerHTML.replace('Longitude: ', '');
+
+      var data = {
+        latitude: latitude,
+        longitude: longitude,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      };
+
+      {% comment %} from here {% endcomment %}
+      $(document).ready(function() {
+        $('#postButton').click(function() {
+          var variable1 = 'value1';
+          var variable2 = 'value2';
+          // Add more variables as needed
+          
+          var data = {
+            'var1': variable1,
+            'var2': variable2
+          };
+          
+          $.ajax({
+            type: 'GET', // Change the method to GET
+            url: '{% url 'endpoint' %}',  // Replace with your actual view URL
+            data: data, // No need to stringify the data in GET requests
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+              console.log(response);
+              // Handle the success response
+            },
+            error: function(xhr, status, error) {
+              console.error(xhr.responseText);
+              // Handle errors
+            }
+          });
+        });
+      });
+
+      
+      
+      
+      
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Variables to Django</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#postButton').click(function() {
+        var variable1 = 'value1';
+        var variable2 = 'value2';
+        // Add more variables as needed
+        
+        var data = {
+          'var1': variable1,
+          'var2': variable2
+        };
+        
+        $.ajax({
+          type: 'GET', // Change the method to GET
+          url: '{% url 'endpoint' %}',  // Replace with your actual view URL
+          data: data, // No need to stringify the data in GET requests
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          success: function(response) {
+            console.log(response);
+            // Handle the success response
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            // Handle errors
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Send Variables to Django</h1>
+  <button id="postButton">Send Variables</button>
+</body>
+</html>
+
+
+
+//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Variables to Django</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#postButton').click(function() {
+        var variable1 = 'value1';
+        var variable2 = 'value2';
+        // Add more variables as needed
+        
+        var data = {
+          'var1': variable1,
+          'var2': variable2
+        };
+        
+        $.ajax({
+          type: 'GET', // Change the method to GET
+          url: '{% url 'endpoint' %}',  // Replace with your actual view URL
+          data: data, // No need to stringify the data in GET requests
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          success: function(response) {
+            console.log(response);
+            // Handle the success response
+          },
+          error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            // Handle errors
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Send Variables to Django</h1>
+  <button id="postButton">Send Variables</button>
+</body>
+</html>

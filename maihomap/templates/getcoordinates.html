@@ -1,4 +1,4 @@
-{% comment %}  <!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <title>Map Coordinate Selector</title>
@@ -29,6 +29,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     var map = L.map('map').setView([51.505, -0.09], 13);
     
@@ -64,72 +65,53 @@
       var latitude = latitudeElement.innerHTML.replace('Latitude: ', '');
       var longitude = longitudeElement.innerHTML.replace('Longitude: ', '');
 
-      var data = {
-        latitude: latitude,
-        longitude: longitude,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      };
+      
+      
+          
+          // Add more variables as needed
+          
+          var data = {
+            'var1': latitude,
+            'var2': longitude,
+          };
+          console.log(latitude,longitude)
+          
+          $.ajax({
+            type: 'GET', // Change the method to GET
+            url: '{% url 'endpoint' %}',  // Replace with your actual view URL
+            data: data, // No need to stringify the data in GET requests
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRFToken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+              console.log(response);
+              // Handle the success response
+            },
+            error: function(xhr, status, error) {
+              console.error(xhr.responseText);
+              // Handle errors
+            }
+          });
+      
+      
 
-      fetch('http://127.0.0.1:8000/endpoint/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          {% comment %} 'X-CSRFToken': {{csrf_token}} 
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-      .then(responseData => {
-        console.log(responseData);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      
+      
+      
+      
     });
   </script>
-</body>
-</html> {% endcomment %} 
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Send Variables to Django</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#postButton').click(function() {
-        var variable1 = 'value1';
-        var variable2 = 'value2';
-        // Add more variables as needed
-        
-        var data = {
-          'var1': variable1,
-          'var2': variable2
-        };
-        
-        $.ajax({
-          type: 'GET', // Change the method to GET
-          url: '{% url 'endpoint' %}',  // Replace with your actual view URL
-          data: data, // No need to stringify the data in GET requests
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRFToken': '{{ csrf_token }}'
-          },
-          success: function(response) {
-            console.log(response);
-            // Handle the success response
-          },
-          error: function(xhr, status, error) {
-            console.error(xhr.responseText);
-            // Handle errors
-          }
-        });
-      });
-    });
-  </script>
-</head>
-<body>
-  <h1>Send Variables to Django</h1>
-  <button id="postButton">Send Variables</button>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

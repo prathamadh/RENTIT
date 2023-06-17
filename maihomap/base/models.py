@@ -21,3 +21,11 @@ class Owner(models.Model):
     desc=models.CharField(max_length=500)
     rentprice=models.IntegerField()
     noroom=models.IntegerField()
+    def __str__(self):
+        return self.name
+
+# class Acount:
+#     name=models.CharField( max_length=50)
+#     phone=models.models.CharField(, max_length=12)
+#     email=models.EmailField(max_length=254)
+    

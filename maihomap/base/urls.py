@@ -9,5 +9,10 @@ urlpatterns = [
     path('', views.index,name="basepage"),
     path('ownerpage/',views.owner,name="owner"),
     #path('gmc/',views.gmc,name="gmc"),
-    path('endpoint/', views.endpoint_view, name='endpoint')
+    path('endpoint/', views.endpoint_view, name='endpoint'),
+    path('experiments/', views.experiment, name='experiment'),
+    path('signin/', views.signin, name='signin')
+    
+    
+
 ]
