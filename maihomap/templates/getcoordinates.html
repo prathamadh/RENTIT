@@ -103,16 +103,15 @@
         // Add more variables as needed
         
         var data = {
-          variable1: variable1,
-          variable2: variable2
+          'var1': variable1,
+          'var2': variable2
         };
         
         $.ajax({
-          type: 'POST',
+          type: 'GET', // Change the method to GET
           url: '{% url 'endpoint' %}',  // Replace with your actual view URL
-          data: JSON.stringify(data),
+          data: data, // No need to stringify the data in GET requests
           headers: {
-            'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRFToken': '{{ csrf_token }}'
           },
@@ -133,4 +132,4 @@
   <h1>Send Variables to Django</h1>
   <button id="postButton">Send Variables</button>
 </body>
-</html> 
+</html>

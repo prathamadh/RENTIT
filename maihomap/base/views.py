@@ -40,19 +40,30 @@ def owner(request):
 #         data=
 
 def endpoint_view(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
             # Retrieve the variables from the POST request
-            var3=request.POST
-            variable1 = request.POST.get('variable1')
-            variable2 = request.POST.get('variable2')
+            payload = request.GET
+            if len(payload)==0:
+                return render(request,"getcoordinates.html")
+            else:
+            # Process the payload data as needed
+                variable1 = payload.get('var1')
+                variable2 = payload.get('var2')
+
+                print(variable1)
+                print(variable2)
+                print(payload)
+                
+
+                
+                # Retrieve more variables as needed
+                
+                # Process the dataS
+                
+                # Return a JSON response
+                response_data = {'message': 'Success',"var1":variable1,"var2":variable2}
+                return JsonResponse(response_data)
             
-            # Retrieve more variables as needed
-            
-            # Process the dataS
-            
-            # Return a JSON response
-            response_data = {'message': 'Success',"var1":variable1,"var2":variable2,"var3":var3}
-            return JsonResponse(response_data)
     else:
             # Handle other HTTP methods if needed
         return render(request,"getcoordinates.html")
