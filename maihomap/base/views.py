@@ -9,6 +9,8 @@ from django.shortcuts import HttpResponse
 from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
+a=28.248767785991863
+b=83.98629856004847
 def index(request):
    
     coordinates = [
@@ -33,6 +35,8 @@ def owner(request):
         rentprice = request.POST.get('rentPrice')
         noroom = request.POST.get('numRooms')
         name = request.POST.get('ownerName')
+        select = request.POST.get('select')
+        
         latitude=28.248767785991863
         longitude=83.98629856004847
 
@@ -45,8 +49,10 @@ def owner(request):
             desc=desc,
             rentprice=rentprice,
             noroom=noroom,
-            name=name
+            name=name,
+            newrequest=0
         )
+        print(request.POST )
 
         # Save the Contact instance
         contact.save()
@@ -62,16 +68,16 @@ def endpoint_view(request):
     if request.method == 'GET':
             # Retrieve the variables from the POST request
             payload = request.GET
-            if len(payload)==0:
-                return render(request,"getcoordinates.html")
-            else:
+            
             # Process the payload data as needed
-                variable1 = payload.get('var1')
-                variable2 = payload.get('var2')
+            variable1 = payload.get('var1')
+            variable2 = payload.get('var2')
+            a=variable1
+            b=variable2
 
-                print(variable1)
-                print(variable2)
-                print(payload)
+            print(variable1)
+            print(variable2)
+            print(payload)
                 
 
                 
@@ -80,12 +86,12 @@ def endpoint_view(request):
                 # Process the dataS
                 
                 # Return a JSON response
-                response_data = {'message': 'Success',"var1":variable1,"var2":variable2}
-                return JsonResponse(response_data)
+            response_data = {'message': 'Success',"var1":variable1,"var2":variable2}
+            return JsonResponse(response_data)
             
     else:
             # Handle other HTTP methods if needed
-        return render(request,"getcoordinates.html")
+        return HttpResponse("cannot get coordinates")
 
 
 def experiment(request):
@@ -127,7 +133,27 @@ def listbuilding(request):
 
 def index2(request):
     #import data
-    return render(request,"index-2.html")
+     owner_obj=Owner.objects.get(id=8)
+     context={"owner":owner_obj.name,"email":owner_obj.name,"phone":owner_obj.phone,"desc":owner_obj.desc,"rentprice":owner_obj.rentprice,"noroom":owner_obj.noroom,}
+     print(context)
+     return render(request,"index-2.html",context)
 
+
+def getcoordinates(request):
+    return render(request,"getcoordinates.html")
+
+def notify(request):
+     a=request.user.id
+     
+     print(a)
+     Owner.objects.filter(name=request.user).update(newrequest=a)
+     return JsonResponse({"hello":a})
+    #  name=request.Get.ge('name')
+    #  obj=Owner.objects.filter(name="Terry")
+
+def customer(request):
+     return render(request,"customer.html")
+
+     
 
 

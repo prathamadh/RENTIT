@@ -13,7 +13,12 @@ urlpatterns = [
     path('experiments/', views.experiment, name='experiment'),
     path('signin/', views.signin, name='signin'),
     path('listbuliding/', views.listbuilding, name='listbuilding'),
-    path('index2/', views.index2, name='index2')
+    path('index2/', views.index2, name='index2'),
+    path('getcoordinates/', views.getcoordinates, name='getcoordinates'),
+    path('notify/', views.notify, name='notify'),
+    path('customer/', views.customer, name='customer')
+
+    
 
     
     

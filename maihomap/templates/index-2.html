@@ -139,7 +139,7 @@
 
     <div id="container">
       <div class="product-details">
-        <h1>{variable: house name }</h1>
+        <h1>{{owner}}</h1>
         <span class="hint-star star">
           <i class="fa fa-star" aria-hidden="true"></i>
           <i class="fa fa-star" aria-hidden="true"></i>
@@ -148,11 +148,11 @@
           <i class="fa fa-star-o" aria-hidden="true"></i>
         </span>
 
-        <p class="information">{variable: house details}</p>
+        <p class="information">{{desc}}</p>
 
         <div class="control">
-          <button class="btn">
-            <span class="price">{variable:price}</span>
+          <button class="btn" id="getApi">
+            <span class="price">{{rentprice}}</span>
             <span class="shopping-cart"
               ><i class="fa fa-shopping-cart" aria-hidden="true"></i
             ></span>
@@ -162,7 +162,7 @@
       </div>
 
       <div class="product-image">
-        <img src="{variable: house image}" alt="" />
+        <img src={% static 'img/room2.png' %} alt="" />
 
         <div class="info">
           <h2>Description</h2>
@@ -199,6 +199,11 @@
             console.log(naam) 
          }
         });
+
+        var getApi=document.getElementById('getApi');
+        getApi.addEventListener('click',()=>{
+          window.location.replace("http://127.0.0.1:8000/");
+        })
       });
     </script>
   </body>
