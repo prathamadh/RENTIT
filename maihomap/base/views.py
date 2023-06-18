@@ -3,6 +3,8 @@ from base.models import Contact
 from base.models import Owner
 from django.shortcuts import redirect
 # from base.models import Owner
+from django.db.models import Q
+import requests
 
 # Create your views here.
 from django.shortcuts import HttpResponse
@@ -11,19 +13,55 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 a=28.248767785991863
 b=83.98629856004847
+a =False
+image="/static/img/placeholder.png"
 def index(request):
+    #owner.objects.raw("select longitude,latitude from base_Owner where longitude like '28.24%' and latitude like '83.98%'")
+    search_query = '28'
+    search_query2 = '83'
+
+    results = Owner.objects.filter(Q(latitude__contains=search_query)|Q(latitude__contains=search_query2))
+    #if a==False:
+    image="static/img/blacklogo.png"
+    image2="static/img/placeholder.png"
+
+
    
-    coordinates = [
-    {"latitude": 28.248767785991863, "longitude": 83.98629856004847},
-    {"latitude": 28.259071283420692, "longitude": 83.9791488647461},
-    {"latitude": 28.246369554498177 , "longitude": 83.98497168545931},
-    {"latitude": 28.261772096881458, "longitude": 83.95889282226562},
-    {"latitude": 28.230187780248816, "longitude": 84.00179002120969}
-    ]
-        # coordinates={"latitude":[28.248767785991863,28.24876778599863,28.2487677859183,28.248767785991363, 28.24876778599863],"longitude":[ 83.98629856004847, 83.9862985600847, 83.9862985600447 83.9862985600847, 83.9862985604847]}
+       
+    coordinates = []
+    coordinates2=[]
+    for result in results:
+      
+        coordinates.append({"Longitude": result.longitude, "Latitude": result.latitude})
 
+    print(coordinates)
+    if request.method=="GET":
+          search=request.GET.get("search")
+          print(search)
+          var=str(search)
+          if search :
+    
+            url = f'https://overpass-api.de/api/interpreter?data=[out:json];area[name="Pokhara"];node(area)["amenity"="{search}"];out;'
+            response = requests.get(url)
+            
+            image="static/img/blacklogo.png"
 
-    return render(request,'index.html',{"coordinates":coordinates})
+                # Check the response status
+            if response.status_code == 200:
+                # Parse the JSON response
+                data = response.json()
+
+        # Process the data
+            for result in data['elements']:
+                name = result.get('tags', {}).get('name', 'N/A')
+                latitude = result.get('lat', 'N/A')
+                longitude = result.get('lon', 'N/A')
+                coordinates2.append({"Longitude": longitude, "Latitude":latitude})
+                
+            
+    
+
+    return render(request,'index.html',{"coordinates":coordinates,"coordinates2":coordinates2,'image':image,"image2":image2,"search":var})
 
 def owner(request):
     if request.method == 'POST':

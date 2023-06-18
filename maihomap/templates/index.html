@@ -41,25 +41,30 @@
         <!-- Container wrapper -->
         <div class="container">
           <!-- Navbar brand -->
-          <a class="navbar-brand" href="#"
+          <a class="navbar-brand" href={% url 'basepage' %}
             ><i class="fa-sharp fa-solid fa-house-chimney-user">Rent-It</i></a
           >
           <!-- Search form -->
-          <form class="input-group" style="width: 400px">
+          <form class="input-group" style="width: 400px" method="get">
+            {% csrf_token %}
             <input
               type="search"
+              name="search"
+              id="search"
               class="form-control"
               placeholder="Location"
               aria-label="Search"
             />
+            
             <button
               class="btn btn-outline-primary"
-              type="button"
+              type="submit"
               data-mdb-ripple-color="dark"
               style="padding: 0.45rem 1.5rem 0.35rem"
             >
               Search
             </button>
+            
           </form>
   
           <label class="switch">
@@ -88,7 +93,7 @@
                 <a
                   class="nav-link d-flex flex-column text-center"
                   aria-current="page"
-                  href="#"
+                  href={% url 'owner' %}
                   ><i class="fa-solid fa-money-bill-trend-up"></i
                   ><span class="small">Rent Out</span></a
                 >
@@ -170,9 +175,18 @@ map.setView([28.26689, 83.96851], 13);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map);
-{% for c in coordinates %} 
-L.marker([{{c.latitude}}, {{c.longitude}}]).addTo(map).bindPopup("Hello");
-{% endfor %} 
+{% for c in coordinates %}
+
+//L.marker([{{ c.Latitude }}, {{ c.Longitude }}]).addTo(map).bindPopup("Hello");
+
+L.marker([{{ c.Latitude }}, {{ c.Longitude }}],{icon:L.icon({iconUrl:'{{image2}}',iconSize:[25,41],iconAnchor:[12,41],popupAnchor:[1,-34]})}).addTo(map).bindPopup("LInk to the House OwnerPage");
+{% endfor %}
+{% for c in coordinates2 %}
+
+//L.marker([{{ c.Latitude }}, {{ c.Longitude }}]).addTo(map).bindPopup("Hello");
+
+L.marker([{{ c.Latitude }}, {{ c.Longitude }}],{icon:L.icon({iconUrl:'{{image}}',iconSize:[25,41],iconAnchor:[12,41],popupAnchor:[1,-34]})}).addTo(map).bindPopup("{{search}}");
+{% endfor %}
 findMeButton.addEventListener("click", () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error);

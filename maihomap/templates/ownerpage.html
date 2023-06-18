@@ -93,21 +93,22 @@
                 required
               ></textarea>
             </div>
-            <!-- <input 
+             <input 
+             id="select"
               name="select"
               {% comment %} type="submit" {% endcomment %}
               
               class="btn solid"
-              href={% url 'getcoordinates' %}
+              {% comment %} href={% url 'getcoordinates' %} {% endcomment %}
               required
-             disabled
-            /> -->
-            <button   name="select"
+             {% comment %} onclick="" {% endcomment %}
+            /> 
+            <!-- <button   name="select"
             id="select"
             class="btn solid"
             onclick="get"
             required
-           disabled></button>
+           disabled></button> -->
             <input type="submit" id="submit" value="Submit" class="btn solid" />
             <!-- <p class="social-text">Or Sign in with social platforms</p>
             <div class="social-media">
@@ -144,6 +145,7 @@
     var get = document.getElementById('select');
     get.addEventListener("click",function(){
       window.location.replace('http://127.0.0.1:8000/getcoordinates/');
+      console.log('hhhh');
     })
   </script>
 </html>
