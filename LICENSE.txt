@@ -1,22 +1,21 @@
-RENTIT Non-Commercial Attribution License
+MIT License
 
-This work is licensed under a combination of the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0) and the GNU General Public License version 3 (GPL-3.0).
+Copyright (c) 2019 Pratham 
 
-You are free to:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-- Share: Copy and redistribute the material in any medium or format.
-- Adapt: Remix, transform, and build upon the material.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Under the following terms:
-
-1. Attribution: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-
-2. Non-Commercial: You may not use the material for commercial purposes. For purposes of this license, "commercial purposes" means primarily intended for or directed towards commercial advantage or monetary compensation.
-
-3. Share-Alike: If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
-
-These terms apply to the extent permitted by the Creative Commons and GNU GPL licenses as outlined above.
-
-For more details about the licenses, visit:
-- CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/
-- GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.en.html
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
